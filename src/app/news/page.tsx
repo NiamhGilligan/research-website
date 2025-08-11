@@ -1,11 +1,11 @@
-import { Flex } from "@/once-ui/components";
-import MasonryGrid from "@/components/gallery/MasonryGrid";
+import { Column } from "@/once-ui/components";
+import { News } from "@/components/news/News";
 import { baseURL } from "@/app/resources";
-import { gallery, person } from "@/app/resources/content";
+import { news, person } from "@/app/resources/content";
 
 export async function generateMetadata() {
-  const title = gallery.title;
-  const description = gallery.description;
+  const title = news.title;
+  const description = news.description;
   const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
 
   return {
@@ -15,7 +15,7 @@ export async function generateMetadata() {
       title,
       description,
       type: "website",
-      url: `https://${baseURL}/gallery`,
+      url: `https://${baseURL}/news`,
       images: [
         {
           url: ogImage,
@@ -32,36 +32,35 @@ export async function generateMetadata() {
   };
 }
 
-export default function Gallery() {
+export default function NewsPage() {
   return (
-    <Flex fillWidth>
+    <Column maxWidth="xl">
       <script
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ImageGallery",
-            name: gallery.title,
-            description: gallery.description,
-            url: `https://${baseURL}/gallery`,
-            image: gallery.images.map((image) => ({
-              "@type": "ImageObject",
-              url: `${baseURL}${image.src}`,
-              description: image.alt,
-            })),
+            "@type": "CollectionPage",
+            headline: news.title,
+            description: news.description,
+            url: `https://${baseURL}/news`,
+            image: `${baseURL}/og?title=Latest%20News`,
             author: {
               "@type": "Person",
               name: person.name,
-              image: {
-                "@type": "ImageObject",
-                url: `${baseURL}${person.avatar}`,
-              },
             },
+            hasPart: news.newsItems.map((item) => ({
+              "@type": "NewsArticle",
+              headline: item.title,
+              description: item.content,
+              datePublished: item.date,
+              url: `https://${baseURL}/news#${item.id}`,
+            })),
           }),
         }}
       />
-      <MasonryGrid />
-    </Flex>
+      <News />
+    </Column>
   );
 }

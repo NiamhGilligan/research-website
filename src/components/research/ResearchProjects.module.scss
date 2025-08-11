@@ -1,0 +1,119 @@
+.sidebar {
+  min-width: 250px;
+  max-width: 250px;
+
+  @media (max-width: 768px) {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+.navLink {
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  &.active {
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+  }
+}
+
+.imageContainer {
+  max-width: 1000px;
+  width: 100%;
+  max-height: 600px;
+  padding: 10px;
+}
+
+.projectImage {
+  border-radius: 8px;
+  object-fit: cover;
+  max-width: 100%;
+  height: auto;
+  width: 100%;
+  display: block;
+}
+
+.evoRobotArm {
+  img {
+    border-radius: 8px;
+    aspect-ratio: 561 / 487;
+  }
+}
+
+.sfiLogo {
+  img {
+    border-radius: 8px;
+    aspect-ratio: 463 / 211 !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+.riaFunding {
+  max-height: 200px;
+
+  img {
+    border-radius: 8px;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: auto !important;
+    background-color: white !important;
+    padding: 20px !important;
+  }
+}
+
+.gbMap {
+  max-width: 800px !important;
+  max-height: 600px !important;
+
+  img {
+    border-radius: 8px;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: white !important;
+  }
+}
+
+.pokerSimulator {
+  max-width: 900px !important;
+  max-height: 700px !important;
+
+  img {
+    border-radius: 8px;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: auto !important;
+    background-color: white !important;
+  }
+}
+
+.smartHome {
+  max-width: 800px !important;
+  max-height: 600px !important;
+
+  img {
+    border-radius: 8px;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: auto !important;
+    background-color: white !important;
+  }
+}
+
+.projectCard {
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-l);
+  }
+}

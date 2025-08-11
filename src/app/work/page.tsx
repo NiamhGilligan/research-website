@@ -1,6 +1,5 @@
-import { getPosts } from "@/app/utils/utils";
 import { Column } from "@/once-ui/components";
-import { Projects } from "@/components/work/Projects";
+import { ResearchProjects } from "@/components/research/ResearchProjects";
 import { baseURL } from "@/app/resources";
 import { person, work } from "@/app/resources/content";
 
@@ -34,10 +33,8 @@ export async function generateMetadata() {
 }
 
 export default function Work() {
-  let allProjects = getPosts(["src", "app", "work", "projects"]);
-
   return (
-    <Column maxWidth="m">
+    <Column maxWidth="xl">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -47,23 +44,22 @@ export default function Work() {
             "@type": "CollectionPage",
             headline: work.title,
             description: work.description,
-            url: `https://${baseURL}/projects`,
-            image: `${baseURL}/og?title=Design%20Projects`,
+            url: `https://${baseURL}/work`,
+            image: `${baseURL}/og?title=Research%20Projects`,
             author: {
               "@type": "Person",
               name: person.name,
             },
-            hasPart: allProjects.map((project) => ({
+            hasPart: work.projects.map((project) => ({
               "@type": "CreativeWork",
-              headline: project.metadata.title,
-              description: project.metadata.summary,
-              url: `https://${baseURL}/projects/${project.slug}`,
-              image: `${baseURL}/${project.metadata.image}`,
+              headline: project.title,
+              description: project.description,
+              url: `https://${baseURL}/work#${project.id}`,
             })),
           }),
         }}
       />
-      <Projects />
+      <ResearchProjects />
     </Column>
   );
 }

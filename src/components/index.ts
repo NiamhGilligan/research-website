@@ -4,3 +4,7 @@ export { Mailchimp } from "@/components/Mailchimp";
 export { ProjectCard } from "@/components/ProjectCard";
 export { HeadingLink } from "@/components/HeadingLink";
 export { RouteGuard } from "@/components/RouteGuard";
+export { Publications } from "@/components/publications/Publications";
+export { Team } from "@/components/team/Team";
+export { ResearchProjects } from "@/components/research/ResearchProjects";
+export { News } from "@/components/news/News";

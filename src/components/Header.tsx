@@ -14,6 +14,8 @@ import {
   blog,
   work,
   gallery,
+  team,
+  news,
 } from "@/app/resources/content";
 
 type TimeDisplayProps = {
@@ -108,12 +110,12 @@ export const Header = () => {
                     className="s-flex-hide"
                     prefixIcon="book"
                     href="/news"
-                    label={about.label}
+                    label={news.label}
                     selected={pathname === "/news"}
                   />
                   <ToggleButton
                     className="s-flex-show"
-                    prefixIcon="person"
+                    prefixIcon="book"
                     href="/news"
                     selected={pathname === "/news"}
                   />
@@ -142,7 +144,7 @@ export const Header = () => {
                     className="s-flex-hide"
                     prefixIcon="person"
                     href="/team"
-                    label={blog.label}
+                    label={team.label}
                     selected={pathname.startsWith("/team")}
                   />
                   <ToggleButton
