@@ -52,7 +52,7 @@ export default function Blog() {
               name: person.name,
               image: {
                 "@type": "ImageObject",
-                url: `${baseURL}${person.avatar}`,
+                url: `https://${baseURL}${person.avatar}`,
               },
             },
           }),

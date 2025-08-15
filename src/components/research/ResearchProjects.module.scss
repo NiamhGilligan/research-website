@@ -1,10 +1,59 @@
 .sidebar {
   min-width: 250px;
   max-width: 250px;
+  transition: all 0.3s ease;
 
   @media (max-width: 768px) {
     min-width: 100%;
     max-width: 100%;
+    display: none;
+
+    &.sidebarOpen {
+      display: flex;
+      margin-bottom: 16px;
+      padding: 16px;
+      background: var(--color-surface);
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+    }
+  }
+}
+
+.mobileNavToggle {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+}
+
+.content {
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.selectedProjectCard {
+  word-wrap: break-word;
+
+  @media (max-width: 768px) {
+    padding: 12px !important;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px !important;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+}
+
+.imagesGrid {
+  @media (max-width: 768px) {
+    gap: 12px !important;
   }
 }
 
@@ -13,6 +62,11 @@
   border-radius: 6px;
   transition: all 0.2s ease;
   text-decoration: none;
+
+  @media (max-width: 768px) {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
 
   &:hover {
     background-color: var(--color-surface-hover);
@@ -29,6 +83,11 @@
   width: 100%;
   max-height: 600px;
   padding: 10px;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+    max-height: 400px;
+  }
 }
 
 .projectImage {
@@ -38,12 +97,39 @@
   height: auto;
   width: 100%;
   display: block;
+
+  @media (max-width: 768px) {
+    border-radius: 6px;
+  }
+}
+
+.projectCard {
+  // Text overflow handling
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+
+  @media (max-width: 768px) {
+    padding: 16px !important;
+    overflow: hidden;
+    word-wrap: break-word;
+
+    &:hover {
+      transform: translateY(-2px);
+      transition: transform 0.2s ease;
+    }
+  }
 }
 
 .evoRobotArm {
   img {
     border-radius: 8px;
     aspect-ratio: 561 / 487;
+
+    @media (max-width: 768px) {
+      aspect-ratio: auto;
+      max-height: 300px;
+    }
   }
 }
 
@@ -54,11 +140,20 @@
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
+
+    @media (max-width: 768px) {
+      aspect-ratio: auto !important;
+      max-height: 200px !important;
+    }
   }
 }
 
 .riaFunding {
   max-height: 200px;
+
+  @media (max-width: 768px) {
+    max-height: 150px;
+  }
 
   img {
     border-radius: 8px;
@@ -67,12 +162,21 @@
     height: auto !important;
     background-color: white !important;
     padding: 20px !important;
+
+    @media (max-width: 768px) {
+      padding: 12px !important;
+    }
   }
 }
 
 .gbMap {
   max-width: 800px !important;
   max-height: 600px !important;
+
+  @media (max-width: 768px) {
+    max-width: 100% !important;
+    max-height: 400px !important;
+  }
 
   img {
     border-radius: 8px;
@@ -87,6 +191,11 @@
   max-width: 900px !important;
   max-height: 700px !important;
 
+  @media (max-width: 768px) {
+    max-width: 100% !important;
+    max-height: 500px !important;
+  }
+
   img {
     border-radius: 8px;
     object-fit: contain !important;
@@ -100,6 +209,11 @@
   max-width: 800px !important;
   max-height: 600px !important;
 
+  @media (max-width: 768px) {
+    max-width: 100% !important;
+    max-height: 400px !important;
+  }
+
   img {
     border-radius: 8px;
     object-fit: contain !important;
@@ -109,11 +223,217 @@
   }
 }
 
-.projectCard {
-  transition: all 0.2s ease;
+// Text content styles to prevent overflow
+.projectTitle {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
+  word-break: break-word;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-l);
+  @media (max-width: 768px) {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    word-break: break-all;
+    overflow: hidden;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px !important;
+    line-height: 1.3 !important;
+    overflow: hidden;
+  }
+}
+
+.projectDescription {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
+  word-break: break-word;
+
+  @media (max-width: 768px) {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    word-break: break-all;
+    overflow: hidden;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    overflow: hidden;
+  }
+}
+
+.projectDetails {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
+  word-break: break-word;
+
+  @media (max-width: 768px) {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    word-break: break-all;
+    overflow: hidden;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    overflow: hidden;
+  }
+}
+
+.projectTechnologies {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
+  word-break: break-word;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+  }
+
+  @media (max-width: 480px) {
+    flex-wrap: wrap !important;
+    gap: 2px !important;
+  }
+}
+
+// Additional overflow prevention for all text elements
+.projectCard * {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.selectedProjectCard * {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+// Force text wrapping for very long words
+.projectCard h1,
+.projectCard h2,
+.projectCard h3,
+.projectCard h4,
+.projectCard h5,
+.projectCard h6,
+.projectCard p,
+.projectCard span {
+  word-break: break-all;
+  hyphens: auto;
+
+  @media (max-width: 480px) {
+    word-break: break-all;
+    overflow-wrap: anywhere;
+  }
+}
+
+// Specific styles for research project badges and content
+.selectedProjectCard {
+  // Override any conflicting styles
+  * {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  // Badge specific styles
+  [data-component="Badge"] {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-break: break-all !important;
+    white-space: normal !important;
+
+    @media (max-width: 768px) {
+      font-size: 11px !important;
+      padding: 4px 8px !important;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 10px !important;
+      padding: 2px 6px !important;
+    }
+  }
+
+  // Text component overrides
+  [data-component="Text"] {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+  }
+
+  // Heading component overrides
+  [data-component="Heading"] {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+  }
+}
+
+// Comprehensive override for research projects
+.content {
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  // Force all text elements to wrap
+  * {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  // Specific overrides for different screen sizes
+  @media (max-width: 768px) {
+    * {
+      word-break: break-all !important;
+      overflow-wrap: anywhere !important;
+      overflow: hidden !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    * {
+      word-break: break-all !important;
+      overflow-wrap: anywhere !important;
+      overflow: hidden !important;
+    }
+  }
+}
+
+// Research projects page wrapper
+.researchPageWrapper {
+  // Force all text elements to wrap
+  * {
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  // Specific overrides for different screen sizes
+  @media (max-width: 768px) {
+    * {
+      word-break: break-all !important;
+      overflow-wrap: anywhere !important;
+      overflow: hidden !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    * {
+      word-break: break-all !important;
+      overflow-wrap: anywhere !important;
+      overflow: hidden !important;
+    }
   }
 }

@@ -14,11 +14,12 @@ const person = {
 
 const newsletter = {
   display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
+  title: <>Get in Touch</>,
   description: (
     <>
-      I occasionally write about design, technology, and share thoughts on the
-      intersection of creativity and engineering.
+      Interested in collaborating on AI and Machine Learning research? We
+      welcome inquiries from potential collaborators, industry partners, and
+      prospective students.
     </>
   ),
 };
@@ -27,14 +28,9 @@ const social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
   {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/once-ui-system/nextjs-starter",
-  },
-  {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/karl-mason-41581b8b/",
   },
   {
     name: "X",
@@ -51,12 +47,26 @@ const social = [
 const home = {
   label: "Home",
   title: `${person.name}`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
+  description: `Research group website showcasing AI and Machine Learning research at the School of Computer Science, University of Galway`,
   headline: <>The Mason Research Group</>,
   subline: (
     <>
       School of Computer Science,
       <br /> University of Galway
+    </>
+  ),
+  mission: (
+    <>
+      The aim of our research group is to develop new and effective Artificial
+      Intelligence and Machine Learning algorithms and to apply these algorithms
+      to solve real world problems.
+    </>
+  ),
+  funding: (
+    <>
+      The research conducted within this research group is supported by funding
+      from sources including: Research Ireland (Science Foundation Ireland,
+      Irish Research Council), Enterprise Ireland, and the Royal Irish Academy.
     </>
   ),
 };
@@ -1052,164 +1062,6 @@ const publications = {
   ],
 };
 
-const gallery = {
-  label: "Research Gallery",
-  title: "Research Projects & Publications",
-  description: `A collection of research work, publications, and projects by ${person.name}`,
-  images: [
-    {
-      src: "/images/images-previous/aiPrintImage.png",
-      alt: "AI Print Research Project",
-      orientation: "horizontal", // 1980x1091
-    },
-    {
-      src: "/images/images-previous/aiPrintImage2.png",
-      alt: "AI Print Research Development",
-      orientation: "vertical", // 924x1125
-    },
-    {
-      src: "/images/images-previous/aiPrintImage3.png",
-      alt: "AI Print Research Results",
-      orientation: "horizontal", // 2934x1082
-    },
-    {
-      src: "/images/images-previous/aiPrintLogo.png",
-      alt: "AI Print Project Logo",
-      orientation: "horizontal", // 1303x818
-    },
-    {
-      src: "/images/images-previous/ArduinoBraccioGIF.gif",
-      alt: "Arduino Braccio Robotic Arm",
-      orientation: "vertical", // 720x1280
-    },
-    {
-      src: "/images/images-previous/roboticArmVRep.gif",
-      alt: "Robotic Arm V-REP Simulation",
-      orientation: "horizontal", // 1920x1020
-    },
-    {
-      src: "/images/images-previous/CopelliaSimGIF.gif",
-      alt: "CoppeliaSim Robotics Simulation",
-      orientation: "horizontal", // 1696x832
-    },
-    {
-      src: "/images/images-previous/3DPrinter.gif",
-      alt: "3D Printer in Action",
-      orientation: "vertical", // 1080x1920
-    },
-    {
-      src: "/images/images-previous/RoboticSwarmDots.gif",
-      alt: "Robotic Swarm Simulation",
-      orientation: "horizontal", // 1280x720
-    },
-    {
-      src: "/images/images-previous/Lo-MARVE_GIF_V2.gif",
-      alt: "Lo-MARVE Research Project",
-      orientation: "horizontal", // 1920x1080
-    },
-    {
-      src: "/images/images-previous/AdversarialAttacks_normalOpponent.gif",
-      alt: "Adversarial Attacks Research - Normal Opponent",
-      orientation: "horizontal", // 1280x720
-    },
-    {
-      src: "/images/images-previous/AdversarialAttacks_adversarialOpponent.gif",
-      alt: "Adversarial Attacks Research - Adversarial Opponent",
-      orientation: "horizontal", // 1280x720
-    },
-    {
-      src: "/images/images-previous/solarpanelstockimage.jpeg",
-      alt: "Solar Panel Research",
-      orientation: "horizontal", // 2250x1500
-    },
-    {
-      src: "/images/images-previous/smart-homestockimage.png",
-      alt: "Smart Home Technology Research",
-      orientation: "horizontal", // 1280x905
-    },
-    {
-      src: "/images/images-previous/AUV_Perspective1.png",
-      alt: "Autonomous Underwater Vehicle Research",
-      orientation: "horizontal", // 1251x929
-    },
-    {
-      src: "/images/images-previous/BRL_Img.png",
-      alt: "BRL Research Project",
-      orientation: "horizontal", // 3088x2704
-    },
-    {
-      src: "/images/images-previous/exampledemandmapgb.png",
-      alt: "Demand Mapping Research",
-      orientation: "vertical", // 603x843
-    },
-    {
-      src: "/images/images-previous/EvoRobotArm2.png",
-      alt: "Evolutionary Robotics Research",
-      orientation: "horizontal", // 834x724
-    },
-    {
-      src: "/images/images-previous/IEEE_CEC_2021_SlideImage.png",
-      alt: "IEEE CEC 2021 Conference Presentation",
-      orientation: "horizontal", // 1396x768
-    },
-    {
-      src: "/images/news/icccsp-2024-keynote.png",
-      alt: "ICCCSP 2024 Keynote Presentation",
-      orientation: "horizontal", // 1099x618
-    },
-    {
-      src: "/images/images-previous/IASE_Workshop_PAAMS_2.jpg",
-      alt: "IASE Workshop at PAAMS Conference",
-      orientation: "horizontal", // 2048x1365
-    },
-    {
-      src: "/images/images-previous/PanelDiscussionMay2024.jpg",
-      alt: "Panel Discussion May 2024",
-      orientation: "horizontal", // 2048x1365
-    },
-    {
-      src: "/images/images-previous/DLSPA Workshop ECML2023.png",
-      alt: "DLSPA Workshop at ECML 2023",
-      orientation: "horizontal", // 2113x1180
-    },
-    {
-      src: "/images/images-previous/junlin_IET_SmartGrid.png",
-      alt: "IET Smart Grid Research Publication",
-      orientation: "horizontal", // 836x869
-    },
-    {
-      src: "/images/images-previous/ker_journal.png",
-      alt: "KER Journal Publication",
-      orientation: "vertical", // 337x480
-    },
-    {
-      src: "/images/news/springerevostar23.png",
-      alt: "Springer EvoStar 2023 Conference",
-      orientation: "vertical", // 496x755
-    },
-    {
-      src: "/images/images-previous/research_funding_logos5.png",
-      alt: "Research Funding Partners",
-      orientation: "horizontal", // 4836x2328
-    },
-    {
-      src: "/images/images-previous/ncf-ribbon-2024.png",
-      alt: "NCF Ribbon 2024 Award",
-      orientation: "horizontal", // 10630x1149
-    },
-    {
-      src: "/images/images-previous/ria-black.png",
-      alt: "RIA Research Project",
-      orientation: "horizontal", // WebP format
-    },
-    {
-      src: "/images/images-previous/pokersimcodeimg.png",
-      alt: "Poker Simulation Research Code",
-      orientation: "horizontal", // WebP format
-    },
-  ],
-};
-
 export {
   person,
   social,
@@ -1218,7 +1070,6 @@ export {
   about,
   blog,
   work,
-  gallery,
   publications,
   team,
   news,

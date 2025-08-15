@@ -1,62 +1,40 @@
 import { Column } from "@/once-ui/components";
 import { Publications } from "@/components/publications/Publications";
 import { baseURL } from "@/app/resources";
-import { publications, person } from "@/app/resources/content";
+import { publications } from "@/app/resources/content";
+import {
+  generatePageMetadata,
+  generateStructuredData,
+  generatePersonSchema,
+} from "@/app/utils/metadata";
 
 export async function generateMetadata() {
-  const title = publications.title;
-  const description = publications.description;
-  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: "website",
-      url: `https://${baseURL}/publications`,
-      images: [
-        {
-          url: ogImage,
-          alt: title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [ogImage],
-    },
-  };
+  return generatePageMetadata({
+    title: publications.title,
+    description: publications.description,
+    url: "/publications",
+  });
 }
 
-export default function Blog() {
+export default function PublicationsPage() {
+  const structuredData = generateStructuredData({
+    "@type": "CollectionPage",
+    headline: publications.title,
+    description: publications.description,
+    url: `https://${baseURL}/publications`,
+    image: `https://${baseURL}/og?title=${encodeURIComponent(
+      publications.title
+    )}`,
+    author: generatePersonSchema(),
+  });
+
   return (
     <Column maxWidth="s">
       <script
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            headline: publications.title,
-            description: publications.description,
-            url: `https://${baseURL}/publications`,
-            image: `${baseURL}/og?title=${encodeURIComponent(
-              publications.title
-            )}`,
-            author: {
-              "@type": "Person",
-              name: person.name,
-              image: {
-                "@type": "ImageObject",
-                url: `${baseURL}${person.avatar}`,
-              },
-            },
-          }),
+          __html: JSON.stringify(structuredData),
         }}
       />
       <Publications />

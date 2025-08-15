@@ -1,62 +1,45 @@
 import { Column } from "@/once-ui/components";
 import { ResearchProjects } from "@/components/research/ResearchProjects";
 import { baseURL } from "@/app/resources";
-import { person, work } from "@/app/resources/content";
+import { work } from "@/app/resources/content";
+import {
+  generatePageMetadata,
+  generateStructuredData,
+  generatePersonSchema,
+} from "@/app/utils/metadata";
+import styles from "@/components/research/ResearchProjects.module.scss";
 
 export async function generateMetadata() {
-  const title = work.title;
-  const description = work.description;
-  const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: "website",
-      url: `https://${baseURL}/research/`,
-      images: [
-        {
-          url: ogImage,
-          alt: title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [ogImage],
-    },
-  };
+  return generatePageMetadata({
+    title: work.title,
+    description: work.description,
+    url: "/research",
+  });
 }
 
 export default function Research() {
+  const structuredData = generateStructuredData({
+    "@type": "CollectionPage",
+    headline: work.title,
+    description: work.description,
+    url: `https://${baseURL}/research`,
+    image: `https://${baseURL}/og?title=Research%20Projects`,
+    author: generatePersonSchema(),
+    hasPart: work.projects.map((project) => ({
+      "@type": "CreativeWork",
+      headline: project.title,
+      description: project.description,
+      url: `https://${baseURL}/research#${project.id}`,
+    })),
+  });
+
   return (
-    <Column maxWidth="xl">
+    <Column maxWidth="xl" className={styles.researchPageWrapper}>
       <script
         type="application/ld+json"
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            headline: work.title,
-            description: work.description,
-            url: `https://${baseURL}/research`,
-            image: `${baseURL}/og?title=Research%20Projects`,
-            author: {
-              "@type": "Person",
-              name: person.name,
-            },
-            hasPart: work.projects.map((project) => ({
-              "@type": "CreativeWork",
-              headline: project.title,
-              description: project.description,
-              url: `https://${baseURL}/research#${project.id}`,
-            })),
-          }),
+          __html: JSON.stringify(structuredData),
         }}
       />
       <ResearchProjects />

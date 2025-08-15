@@ -8,59 +8,143 @@ import {
   Badge,
   SmartImage,
   SmartLink,
+  Button,
 } from "@/once-ui/components";
 import { news } from "@/app/resources/content";
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import styles from "./News.module.scss";
 
 export const News = () => {
   const [selectedNewsItem, setSelectedNewsItem] = useState(news.newsItems[0]);
   const [selectedCategory, setSelectedCategory] = useState("All News");
   const [selectedYear, setSelectedYear] = useState("All Years");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Get unique categories for navigation
-  const categories = [...new Set(news.newsItems.map((item) => item.category))];
+  // Memoized helper functions
+  const extractYear = useCallback(
+    (date: string) => date.match(/\d{4}/)?.[0] || "Unknown",
+    []
+  );
 
-  // Get unique years from news items
-  const years = [
-    ...new Set(
-      news.newsItems.map((item) => {
-        const year = item.date.match(/\d{4}/);
-        return year ? year[0] : "Unknown";
-      })
-    ),
-  ].sort((a, b) => parseInt(b) - parseInt(a)); // Sort years descending
-
-  // Filter news items based on selected category and year
-  const filteredNewsItems = news.newsItems.filter((item) => {
-    const itemYear = item.date.match(/\d{4}/)?.[0] || "Unknown";
-    const categoryMatch =
-      selectedCategory === "All News" || item.category === selectedCategory;
-    const yearMatch = selectedYear === "All Years" || itemYear === selectedYear;
-    return categoryMatch && yearMatch;
-  });
-
-  // Utility function to determine image styling based on filename
-  const getImageStyleClass = (imageSrc: string) => {
+  const getImageStyleClass = useCallback((imageSrc: string) => {
     const src = imageSrc.toLowerCase();
+    const imageStyles = {
+      "ncf-ribbon-2024": styles.ncfRibbon,
+      "icccsp-2024-keynote": styles.icccspKeynote,
+      junlin_iet_smartgrid: styles.ietSmartGrid,
+      springerevostar23: styles.springerEvoStar,
+      ker_journal: styles.kerJournal,
+      brl_img: styles.brlImage,
+      "ria-black": styles.riaImage,
+    };
 
-    // Specific image types with known aspect ratios
-    if (src.includes("ncf-ribbon-2024")) return styles.ncfRibbon;
-    if (src.includes("icccsp-2024-keynote")) return styles.icccspKeynote;
-    if (src.includes("junlin_iet_smartgrid")) return styles.ietSmartGrid;
-    if (src.includes("springerevostar23")) return styles.springerEvoStar;
-    if (src.includes("ker_journal")) return styles.kerJournal;
-    if (src.includes("brl_img")) return styles.brlImage;
-    if (src.includes("ria-black")) return styles.riaImage;
+    return (
+      Object.entries(imageStyles).find(([key]) => src.includes(key))?.[1] ||
+      styles.defaultImage
+    );
+  }, []);
 
-    // Default styling for other images
-    return styles.defaultImage;
-  };
+  // Memoized data processing
+  const categories = useMemo(
+    () => [...new Set(news.newsItems.map((item) => item.category))],
+    []
+  );
+
+  const years = useMemo(
+    () =>
+      [...new Set(news.newsItems.map((item) => extractYear(item.date)))].sort(
+        (a, b) => parseInt(b) - parseInt(a)
+      ),
+    [extractYear]
+  );
+
+  // Memoized filtered items
+  const filteredNewsItems = useMemo(
+    () =>
+      news.newsItems.filter((item) => {
+        const itemYear = extractYear(item.date);
+        const categoryMatch =
+          selectedCategory === "All News" || item.category === selectedCategory;
+        const yearMatch =
+          selectedYear === "All Years" || itemYear === selectedYear;
+        return categoryMatch && yearMatch;
+      }),
+    [selectedCategory, selectedYear, extractYear]
+  );
+
+  // Optimized filter change handler
+  const handleFilterChange = useCallback(
+    (newCategory: string, newYear: string) => {
+      setSelectedCategory(newCategory);
+      setSelectedYear(newYear);
+
+      // Find first item matching new filters
+      const firstMatchingItem = news.newsItems.find((item) => {
+        const itemYear = extractYear(item.date);
+        const categoryMatch =
+          newCategory === "All News" || item.category === newCategory;
+        const yearMatch = newYear === "All Years" || itemYear === newYear;
+        return categoryMatch && yearMatch;
+      });
+
+      if (firstMatchingItem) {
+        setSelectedNewsItem(firstMatchingItem);
+      }
+
+      // Close sidebar on mobile after selection
+      setIsSidebarOpen(false);
+    },
+    [extractYear]
+  );
+
+  // Memoized navigation link component
+  const NavLink = useCallback(
+    ({
+      href,
+      onClick,
+      isActive,
+      children,
+    }: {
+      href: string;
+      onClick: () => void;
+      isActive: boolean;
+      children: React.ReactNode;
+    }) => (
+      <SmartLink
+        href={href}
+        onClick={(e) => {
+          e.preventDefault();
+          onClick();
+        }}
+        className={`${styles.navLink} ${isActive ? styles.active : ""}`}
+      >
+        <Text variant="body-default-s">{children}</Text>
+      </SmartLink>
+    ),
+    []
+  );
 
   return (
     <Flex gap="32" mobileDirection="column">
+      {/* Mobile Navigation Toggle */}
+      <Flex className={styles.mobileNavToggle}>
+        <Button
+          variant="secondary"
+          size="s"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        >
+          {isSidebarOpen ? "Hide Navigation" : "Show Navigation"}
+        </Button>
+      </Flex>
+
       {/* Quick Navigation Sidebar */}
-      <Flex direction="column" gap="16" className={styles.sidebar}>
+      <Flex
+        direction="column"
+        gap="16"
+        className={`${styles.sidebar} ${
+          isSidebarOpen ? styles.sidebarOpen : ""
+        }`}
+      >
         <Heading variant="heading-strong-s">Quick Navigation</Heading>
 
         {/* Category Filter */}
@@ -68,39 +152,22 @@ export const News = () => {
           <Text variant="body-default-s" onBackground="neutral-strong">
             Categories
           </Text>
-          <SmartLink
+          <NavLink
             href="#all"
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedCategory("All News");
-              setSelectedNewsItem(news.newsItems[0]);
-            }}
-            className={`${styles.navLink} ${
-              selectedCategory === "All News" ? styles.active : ""
-            }`}
+            onClick={() => handleFilterChange("All News", selectedYear)}
+            isActive={selectedCategory === "All News"}
           >
-            <Text variant="body-default-s">All News</Text>
-          </SmartLink>
+            All News
+          </NavLink>
           {categories.map((category) => (
-            <SmartLink
+            <NavLink
               key={category}
               href={`#${category}`}
-              onClick={(e) => {
-                e.preventDefault();
-                setSelectedCategory(category);
-                const firstItemInCategory = news.newsItems.find(
-                  (item) => item.category === category
-                );
-                if (firstItemInCategory) {
-                  setSelectedNewsItem(firstItemInCategory);
-                }
-              }}
-              className={`${styles.navLink} ${
-                selectedCategory === category ? styles.active : ""
-              }`}
+              onClick={() => handleFilterChange(category, selectedYear)}
+              isActive={selectedCategory === category}
             >
-              <Text variant="body-default-s">{category}</Text>
-            </SmartLink>
+              {category}
+            </NavLink>
           ))}
         </Flex>
 
@@ -109,45 +176,28 @@ export const News = () => {
           <Text variant="body-default-s" onBackground="neutral-strong">
             Years
           </Text>
-          <SmartLink
+          <NavLink
             href="#all-years"
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedYear("All Years");
-              setSelectedNewsItem(news.newsItems[0]);
-            }}
-            className={`${styles.navLink} ${
-              selectedYear === "All Years" ? styles.active : ""
-            }`}
+            onClick={() => handleFilterChange(selectedCategory, "All Years")}
+            isActive={selectedYear === "All Years"}
           >
-            <Text variant="body-default-s">All Years</Text>
-          </SmartLink>
+            All Years
+          </NavLink>
           {years.map((year) => (
-            <SmartLink
+            <NavLink
               key={year}
               href={`#${year}`}
-              onClick={(e) => {
-                e.preventDefault();
-                setSelectedYear(year);
-                const firstItemInYear = news.newsItems.find(
-                  (item) => item.date.match(/\d{4}/)?.[0] === year
-                );
-                if (firstItemInYear) {
-                  setSelectedNewsItem(firstItemInYear);
-                }
-              }}
-              className={`${styles.navLink} ${
-                selectedYear === year ? styles.active : ""
-              }`}
+              onClick={() => handleFilterChange(selectedCategory, year)}
+              isActive={selectedYear === year}
             >
-              <Text variant="body-default-s">{year}</Text>
-            </SmartLink>
+              {year}
+            </NavLink>
           ))}
         </Flex>
       </Flex>
 
       {/* News Content */}
-      <Flex direction="column" gap="32" flex={1}>
+      <Flex direction="column" gap="32" flex={1} className={styles.content}>
         <Flex direction="column" gap="16">
           <Heading variant="display-strong-s">{news.title}</Heading>
           <Text variant="body-default-l" onBackground="neutral-weak">
@@ -156,19 +206,26 @@ export const News = () => {
         </Flex>
 
         {/* Selected News Item Display */}
-        <Card padding="32">
+        <Card padding="32" className={styles.selectedNewsCard}>
           <Flex direction="column" gap="24">
             {/* News Header */}
             <Flex direction="column" gap="16">
               <Flex direction="column" gap="8">
-                <Heading variant="heading-strong-l">
+                <Heading
+                  variant="heading-strong-l"
+                  className={styles.newsTitle}
+                >
                   {selectedNewsItem.title}
                 </Heading>
-                <Text variant="body-default-s" onBackground="neutral-strong">
+                <Text
+                  variant="body-default-s"
+                  onBackground="neutral-strong"
+                  className={styles.newsTitle}
+                >
                   {selectedNewsItem.date}
                 </Text>
               </Flex>
-              <Flex gap="12" wrap>
+              <Flex gap="12" wrap className={styles.newsCategory}>
                 <Badge>{selectedNewsItem.category}</Badge>
                 {selectedNewsItem.featured && <Badge>Featured</Badge>}
               </Flex>
@@ -176,7 +233,9 @@ export const News = () => {
 
             {/* News Content */}
             <Flex direction="column" gap="16">
-              <Text variant="body-default-s">{selectedNewsItem.content}</Text>
+              <Text variant="body-default-s" className={styles.newsContent}>
+                {selectedNewsItem.content}
+              </Text>
               {selectedNewsItem.link && (
                 <Flex gap="8" vertical="center">
                   <Text variant="body-default-s" onBackground="neutral-weak">
@@ -196,6 +255,7 @@ export const News = () => {
             {/* News Image */}
             {selectedNewsItem.image && (
               <Flex direction="column" gap="16">
+                <Heading variant="heading-strong-s">Related Image</Heading>
                 <Flex
                   direction="column"
                   gap="8"
@@ -250,14 +310,24 @@ export const News = () => {
               >
                 <Flex direction="column" gap="16">
                   <Flex direction="column" gap="8">
-                    <Heading variant="heading-strong-m">{item.title}</Heading>
+                    <Heading
+                      variant="heading-strong-m"
+                      className={styles.newsTitle}
+                    >
+                      {item.title}
+                    </Heading>
                     <Text
                       variant="body-default-s"
                       onBackground="neutral-strong"
+                      className={styles.newsTitle}
                     >
                       {item.date}
                     </Text>
-                    <Text variant="body-default-s" onBackground="neutral-weak">
+                    <Text
+                      variant="body-default-s"
+                      onBackground="neutral-weak"
+                      className={styles.newsContent}
+                    >
                       {item.content.length > 200
                         ? `${item.content.substring(0, 200)}...`
                         : item.content}

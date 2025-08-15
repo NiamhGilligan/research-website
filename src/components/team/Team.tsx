@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import {
   Card,
   Flex,
@@ -10,7 +11,106 @@ import {
 import { team } from "@/app/resources/content";
 import styles from "./Team.module.scss";
 
+// Memoized team member card component
+const TeamMemberCard = memo(
+  ({
+    name,
+    period,
+    funder,
+    affiliation,
+  }: {
+    name: string;
+    period: string;
+    funder: string;
+    affiliation?: string;
+  }) => (
+    <Card padding="16">
+      <Flex direction="column" gap="8">
+        <Text variant="body-default-s" onBackground="neutral-strong">
+          <strong>{name}</strong>
+        </Text>
+        <Text variant="body-default-s" onBackground="neutral-weak">
+          {period} • Funder: {funder}
+        </Text>
+        {affiliation && (
+          <Text variant="body-default-s" onBackground="neutral-weak">
+            {affiliation}
+          </Text>
+        )}
+      </Flex>
+    </Card>
+  )
+);
+
+TeamMemberCard.displayName = "TeamMemberCard";
+
+// Memoized team section component
+const TeamSection = memo(
+  ({
+    title,
+    members,
+  }: {
+    title: string;
+    members: Array<{
+      name: string;
+      period: string;
+      funder: string;
+      affiliation?: string;
+    }>;
+  }) => (
+    <Flex direction="column" gap="16">
+      <Heading variant="heading-strong-m">{title}</Heading>
+      <Flex direction="column" gap="12">
+        {members.map((member, index) => (
+          <TeamMemberCard
+            key={`${member.name}-${index}`}
+            name={member.name}
+            period={member.period}
+            funder={member.funder}
+            affiliation={member.affiliation}
+          />
+        ))}
+      </Flex>
+    </Flex>
+  )
+);
+
+TeamSection.displayName = "TeamSection";
+
+// Memoized profile links component
+const ProfileLinks = memo(
+  ({ profiles }: { profiles: Array<{ name: string; url: string }> }) => (
+    <Flex gap="16" wrap>
+      {profiles.map((profile, index) => (
+        <SmartLink
+          key={`${profile.name}-${index}`}
+          href={profile.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {profile.name}
+        </SmartLink>
+      ))}
+    </Flex>
+  )
+);
+
+ProfileLinks.displayName = "ProfileLinks";
+
 export const Team = () => {
+  // Memoized team data to prevent unnecessary re-renders
+  const teamData = useMemo(
+    () => ({
+      principalInvestigator: team.principalInvestigator,
+      postdoctoralResearchers: team.postdoctoralResearchers,
+      affiliatedResearchers: team.affiliatedResearchers,
+      fundedPhDStudents: team.fundedPhDStudents,
+      fundedResearchAssistants: team.fundedResearchAssistants,
+      studentProjects: team.studentProjects,
+    }),
+    []
+  );
+
   return (
     <Flex direction="column" gap="48">
       {/* Principal Investigator Section */}
@@ -25,44 +125,35 @@ export const Team = () => {
       <Card padding="32">
         <Flex direction="column" gap="24">
           <Flex gap="24" mobileDirection="column">
-            <Avatar src={team.principalInvestigator.avatar} size="xl" />
+            <Avatar src={teamData.principalInvestigator.avatar} size="xl" />
             <Flex direction="column" gap="16" flex={1}>
               <Flex direction="column" gap="8">
                 <Heading variant="heading-strong-l">
-                  {team.principalInvestigator.name}
+                  {teamData.principalInvestigator.name}
                 </Heading>
-                <Badge>{team.principalInvestigator.title}</Badge>
+                <Badge>{teamData.principalInvestigator.title}</Badge>
                 <Text variant="body-default-s" onBackground="neutral-strong">
-                  {team.principalInvestigator.position}
+                  {teamData.principalInvestigator.position}
                 </Text>
                 <Text variant="body-default-s" onBackground="neutral-weak">
-                  {team.principalInvestigator.institution}
+                  {teamData.principalInvestigator.institution}
                 </Text>
               </Flex>
 
-              <Flex gap="16" wrap>
-                {team.principalInvestigator.profiles.map((profile, index) => (
-                  <SmartLink
-                    key={index}
-                    href={profile.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {profile.name}
-                  </SmartLink>
-                ))}
-              </Flex>
+              <ProfileLinks
+                profiles={teamData.principalInvestigator.profiles}
+              />
             </Flex>
           </Flex>
 
           <Flex direction="column" gap="16">
             <Text variant="body-default-s">
-              {team.principalInvestigator.bio}
+              {teamData.principalInvestigator.bio}
             </Text>
 
-            {team.principalInvestigator.background.map((item, index) => (
+            {teamData.principalInvestigator.background.map((item, index) => (
               <Text
-                key={index}
+                key={`background-${index}`}
                 variant="body-default-s"
                 onBackground="neutral-weak"
               >
@@ -72,7 +163,7 @@ export const Team = () => {
 
             <Text variant="body-default-s" onBackground="neutral-strong">
               <strong>Research Focus:</strong>{" "}
-              {team.principalInvestigator.research}
+              {teamData.principalInvestigator.research}
             </Text>
           </Flex>
         </Flex>
@@ -80,92 +171,31 @@ export const Team = () => {
 
       {/* Team Members Sections */}
       <Flex direction="column" gap="32">
-        {/* Postdoctoral Researchers */}
-        <Flex direction="column" gap="16">
-          <Heading variant="heading-strong-m">Postdoctoral Researchers</Heading>
-          <Flex direction="column" gap="12">
-            {team.postdoctoralResearchers.map((researcher, index) => (
-              <Card key={index} padding="16">
-                <Flex direction="column" gap="8">
-                  <Text variant="body-default-s" onBackground="neutral-strong">
-                    <strong>{researcher.name}</strong>
-                  </Text>
-                  <Text variant="body-default-s" onBackground="neutral-weak">
-                    {researcher.period} • Funder: {researcher.funder}
-                  </Text>
-                </Flex>
-              </Card>
-            ))}
-          </Flex>
-        </Flex>
+        <TeamSection
+          title="Postdoctoral Researchers"
+          members={teamData.postdoctoralResearchers}
+        />
 
-        {/* Affiliated Researchers */}
-        <Flex direction="column" gap="16">
-          <Heading variant="heading-strong-m">Affiliated Researchers</Heading>
-          <Flex direction="column" gap="12">
-            {team.affiliatedResearchers.map((researcher, index) => (
-              <Card key={index} padding="16">
-                <Flex direction="column" gap="8">
-                  <Text variant="body-default-s" onBackground="neutral-strong">
-                    <strong>{researcher.name}</strong>
-                  </Text>
-                  <Text variant="body-default-s" onBackground="neutral-weak">
-                    {researcher.period} • Funder: {researcher.funder}
-                  </Text>
-                  <Text variant="body-default-s" onBackground="neutral-weak">
-                    {researcher.affiliation}
-                  </Text>
-                </Flex>
-              </Card>
-            ))}
-          </Flex>
-        </Flex>
+        <TeamSection
+          title="Affiliated Researchers"
+          members={teamData.affiliatedResearchers}
+        />
 
-        {/* Funded PhD Students */}
-        <Flex direction="column" gap="16">
-          <Heading variant="heading-strong-m">Funded PhD Students</Heading>
-          <Flex direction="column" gap="12">
-            {team.fundedPhDStudents.map((student, index) => (
-              <Card key={index} padding="16">
-                <Flex direction="column" gap="8">
-                  <Text variant="body-default-s" onBackground="neutral-strong">
-                    <strong>{student.name}</strong>
-                  </Text>
-                  <Text variant="body-default-s" onBackground="neutral-weak">
-                    {student.period} • Funder: {student.funder}
-                  </Text>
-                </Flex>
-              </Card>
-            ))}
-          </Flex>
-        </Flex>
+        <TeamSection
+          title="Funded PhD Students"
+          members={teamData.fundedPhDStudents}
+        />
 
-        {/* Funded Research Assistants */}
-        <Flex direction="column" gap="16">
-          <Heading variant="heading-strong-m">
-            Funded Research Assistants
-          </Heading>
-          <Flex direction="column" gap="12">
-            {team.fundedResearchAssistants.map((assistant, index) => (
-              <Card key={index} padding="16">
-                <Flex direction="column" gap="8">
-                  <Text variant="body-default-s" onBackground="neutral-strong">
-                    <strong>{assistant.name}</strong>
-                  </Text>
-                  <Text variant="body-default-s" onBackground="neutral-weak">
-                    {assistant.period} • Funder: {assistant.funder}
-                  </Text>
-                </Flex>
-              </Card>
-            ))}
-          </Flex>
-        </Flex>
+        <TeamSection
+          title="Funded Research Assistants"
+          members={teamData.fundedResearchAssistants}
+        />
 
         {/* Student Projects */}
         <Flex direction="column" gap="16">
           <Heading variant="heading-strong-m">MSc and BSc Students</Heading>
           <Card padding="16">
-            <Text variant="body-default-s">{team.studentProjects}</Text>
+            <Text variant="body-default-s">{teamData.studentProjects}</Text>
           </Card>
         </Flex>
       </Flex>
