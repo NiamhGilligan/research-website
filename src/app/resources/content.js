@@ -719,7 +719,7 @@ const work = {
       ],
       images: [
         {
-          src: "/images/projects/WebsiteContentRoboticArm.mp4",
+          src: "/images/projects/WebsiteContentRoboticArm.gif",
           alt: "Lo-MARVE Autonomous Underwater Vehicle",
           caption: "Lo-MARVE in action",
         },
