@@ -82,8 +82,22 @@ export const Header = () => {
           fillWidth
           vertical="center"
           textVariant="body-default-s"
+          gap="16"
         >
-          {display.location && <Flex hide="s">{person.location}</Flex>}
+          <img
+            src="/images/images-previous/websiteLogo.png"
+            alt="Mason Research Group Logo"
+            style={{
+              height: "40px",
+              width: "auto",
+              cursor: "pointer",
+              display: "block",
+            }}
+            onClick={() => window.location.href = "/"}
+            onError={(e) => console.error("Logo failed to load:", e)}
+            onLoad={() => console.log("Logo loaded successfully")}
+          />
+         
         </Flex>
         <Flex fillWidth horizontal="center">
           <Flex

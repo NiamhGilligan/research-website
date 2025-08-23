@@ -8,3 +8,4 @@ export { Publications } from "@/components/publications/Publications";
 export { Team } from "@/components/team/Team";
 export { ResearchProjects } from "@/components/research/ResearchProjects";
 export { News } from "@/components/news/News";
+export { HomeCarousel } from "@/components/HomeCarousel";

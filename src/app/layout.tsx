@@ -18,9 +18,9 @@ export async function generateMetadata() {
     title: home.title,
     description: home.description,
     icons: {
-      icon: "/favicon.svg",
-      shortcut: "/favicon.svg",
-      apple: "/favicon.svg",
+      icon: "/images/images-previous/websiteIcon.png",
+      shortcut: "/images/images-previous/websiteIcon.png",
+      apple: "/images/images-previous/websiteIcon.png",
     },
     openGraph: {
       title: `${person.firstName}`,

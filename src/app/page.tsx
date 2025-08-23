@@ -9,9 +9,10 @@ import {
   Column,
 } from "@/once-ui/components";
 import { Projects } from "@/components/work/Projects";
+import { HomeCarousel } from "@/components/HomeCarousel";
 import { baseURL, routes } from "@/app/resources";
-import { home, about, newsletter, person, team } from "@/app/resources/content";
-import { Mailchimp } from "@/components";
+import { home, about, person, team } from "@/app/resources/content";
+
 import { Posts } from "@/components/blog/Posts";
 import {
   generatePageMetadata,
@@ -81,28 +82,15 @@ export default function Home() {
             horizontal="start"
             paddingBottom="l"
           >
-            <Flex gap="24" mobileDirection="column">
-              <Flex direction="column" gap="16" flex={1}>
-                <Heading variant="heading-strong-m">Our Mission</Heading>
-                <Text
-                  wrap="balance"
-                  onBackground="neutral-weak"
-                  variant="body-default-l"
-                >
-                  {home.mission}
-                </Text>
-              </Flex>
-
-              <Flex direction="column" gap="16" flex={1}>
-                <Heading variant="heading-strong-m">Research Funding</Heading>
-                <Text
-                  wrap="balance"
-                  onBackground="neutral-weak"
-                  variant="body-default-s"
-                >
-                  {home.funding}
-                </Text>
-              </Flex>
+            <Flex direction="column" gap="16">
+              <Heading variant="heading-strong-m">Research Funding</Heading>
+              <Text
+                wrap="balance"
+                onBackground="neutral-weak"
+                variant="body-default-s"
+              >
+                {home.funding}
+              </Text>
             </Flex>
           </RevealFx>
 
@@ -125,6 +113,34 @@ export default function Home() {
               </Flex>
             </Button>
           </RevealFx>
+
+          <RevealFx
+            translateY="16"
+            delay={0.5}
+            fillWidth
+            horizontal="center"
+            paddingY="l"
+          >
+            <img
+              src="/images/images-previous/research_funding_logos6.png"
+              alt="Research Funding Logos"
+              style={{
+                maxWidth: "100%",
+                height: "auto",
+                borderRadius: "8px",
+              }}
+            />
+          </RevealFx>
+
+          <RevealFx
+            translateY="16"
+            delay={0.6}
+            fillWidth
+            horizontal="center"
+            paddingY="l"
+          >
+            <HomeCarousel />
+          </RevealFx>
         </Column>
       </Column>
       <RevealFx translateY="16" delay={0.6}>
@@ -143,7 +159,7 @@ export default function Home() {
         </Flex>
       )}
       <Projects range={[2]} />
-      {newsletter.display && <Mailchimp newsletter={newsletter} />}
+
     </Column>
   );
 }
