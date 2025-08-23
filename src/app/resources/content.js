@@ -51,7 +51,8 @@ const home = {
   headline: <>The Mason Research Group</>,
   subline: (
     <>
-      School of Computer Science,
+     <span style={{ fontWeight: 'bold', color: '#84F6C3' }}>Autonomous-Agents-Research.com</span>
+     <br />School of Computer Science,
       <br /> University of Galway
     </>
   ),
@@ -719,7 +720,7 @@ const work = {
       ],
       images: [
         {
-          src: "/images/projects/WebsiteContentRoboticArm.gif",
+          src: "/images/projects/Lo-MARVE_VideoWebsite.mp4",
           alt: "Lo-MARVE Autonomous Underwater Vehicle",
           caption: "Lo-MARVE in action",
         },
@@ -750,14 +751,9 @@ const work = {
       ],
       images: [
         {
-          src: "/images/images-previous/roboticArmVRep.gif",
+          src: "/images/projects/WebsiteContentRoboticArm2.mp4",
           alt: "Robotic Arm V-REP Simulation",
           caption: "V-REP Simulation",
-        },
-        {
-          src: "/images/images-previous/EvoRobotArm2.png",
-          alt: "Evolutionary Robotics Research",
-          caption: "Evolutionary Robotics",
         },
       ],
       technologies: [
@@ -784,7 +780,7 @@ const work = {
       ],
       images: [
         {
-          src: "/images/images-previous/aiPrintLogo.png",
+          src: "/images/projects/aiPRINTWebsiteContent.mp4",
           alt: "aiPRINT Project Logo",
           caption: "aiPRINT Logo",
         },
@@ -819,7 +815,7 @@ const work = {
       ],
       images: [
         {
-          src: "/images/news/sfi_logo.webp",
+          src: "/images/images-previous/EIRE_AIAI_WebsiteImg.png",
           alt: "Science Foundation Ireland Logo",
           caption: "SFI Funding",
         },
@@ -852,7 +848,7 @@ const work = {
           caption: "RIA Funding",
         },
         {
-          src: "/images/images-previous/RoboticSwarmDots.gif",
+          src: "/images/projects/evoMORSWebsiteContent.mp4",
           alt: "Robotic Swarm Simulation",
           caption: "Swarm Simulation",
         },
@@ -910,7 +906,7 @@ const work = {
       ],
       images: [
         {
-          src: "/images/images-previous/smart-homestockimage.png",
+          src: "/images/images-previous/RL_SmartBuildings.png",
           alt: "Smart Home Technology Research",
           caption: "Smart Building Technology",
         },
@@ -939,7 +935,7 @@ const work = {
       ],
       images: [
         {
-          src: "/images/images-previous/solarpanelstockimage.jpeg",
+          src: "/images/images-previous/deepLearningSolarPVWebsiteImg.png",
           alt: "Solar Panel Research",
           caption: "Solar Energy Research",
         },
@@ -953,33 +949,6 @@ const work = {
       funding: "Research Ireland",
       status: "Completed",
       collaboration: "Sandia National Laboratories",
-    },
-    {
-      id: "poker-simulator",
-      title: "Miscellaneous Projects",
-      subtitle: "Texas Holdem Poker Simulator",
-      description:
-        "Development of a Texas Holdem Poker Simulator for research and educational purposes.",
-      details: [
-        "The simulator provides a platform for studying game theory and decision-making algorithms.",
-        "It can be used for testing and validating various poker-playing strategies.",
-        "The project serves as a foundation for research in artificial intelligence and game theory applications.",
-      ],
-      images: [
-        {
-          src: "/images/images-previous/pokersimcodeimg.png",
-          alt: "Poker Simulation Research Code",
-          caption: "Poker Simulator Code",
-        },
-      ],
-      technologies: [
-        "Game Theory",
-        "Simulation",
-        "Decision Making",
-        "Artificial Intelligence",
-      ],
-      funding: "University of Galway",
-      status: "Completed",
     },
   ],
 };
