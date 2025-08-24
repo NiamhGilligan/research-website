@@ -20,12 +20,22 @@
 }
 
 .mobileNavToggle {
-  display: none;
+  display: none !important;
+  visibility: hidden !important;
 
   @media (max-width: 768px) {
-    display: flex;
+    display: flex !important;
+    visibility: visible !important;
     justify-content: center;
     margin-bottom: 16px;
+  }
+}
+
+/* Ensure mobile nav toggle is hidden on desktop */
+@media (min-width: 769px) {
+  .mobileNavToggle {
+    display: none !important;
+    visibility: hidden !important;
   }
 }
 
