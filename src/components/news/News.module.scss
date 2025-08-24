@@ -28,12 +28,21 @@
 }
 
 .mobileNavToggle {
-  display: none;
+  display: none !important;
+  visibility: hidden !important;
 
   @media (max-width: 768px) {
-    display: flex;
+    display: flex !important;
+    visibility: visible !important;
     justify-content: center;
     margin-bottom: 16px;
+  }
+}
+
+/* Override display-flex class only on desktop */
+@media (min-width: 769px) {
+  .mobileNavToggle.display-flex {
+    display: none !important;
   }
 }
 
