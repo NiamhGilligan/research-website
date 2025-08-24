@@ -187,19 +187,22 @@
 }
 
 .gbMap {
-  max-width: 800px !important;
-  max-height: 600px !important;
+  max-width: 600px !important;
+  max-height: none !important;
+  height: fit-content !important;
 
   @media (max-width: 768px) {
     max-width: 100% !important;
-    max-height: 400px !important;
+    max-height: none !important;
+    height: fit-content !important;
   }
 
   img {
     border-radius: 8px;
     object-fit: contain !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
+    max-height: none !important;
     background-color: white !important;
   }
 }

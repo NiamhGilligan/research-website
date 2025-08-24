@@ -1,4 +1,3 @@
-import { InlineCode } from "@/once-ui/components";
 
 const person = {
   firstName: "Mason",
@@ -6,22 +5,7 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Design Engineer",
-  avatar: "/images/avatar.jpg",
-  location: "Europe/Dublin",
-  languages: ["English"], // optional: Leave the array empty if you don't want to display languages
-};
-
-const newsletter = {
-  display: true,
-  title: <>Get in Touch</>,
-  description: (
-    <>
-      Interested in collaborating on AI and Machine Learning research? We
-      welcome inquiries from potential collaborators, industry partners, and
-      prospective students.
-    </>
-  ),
+  languages: ["English"]
 };
 
 const social = [
@@ -47,7 +31,7 @@ const social = [
 const home = {
   label: "Home",
   title: `${person.name}`,
-  description: `Research group website showcasing AI and Machine Learning research at the School of Computer Science, University of Galway`,
+  description: ``,
   headline: <>The Mason Research Group</>,
   subline: (
     <>
@@ -75,7 +59,7 @@ const home = {
 const news = {
   label: "News",
   title: "Latest News",
-  description: `Latest updates and announcements from ${person.name}'s research group`,
+  description: ``,
   newsItems: [
     {
       id: "junlin-phd-defense",
@@ -423,152 +407,10 @@ const news = {
   ],
 };
 
-const about = {
-  label: "About",
-  title: "About Me",
-  description: `Meet ${person.name}, ${person.role} from ${person.location}`,
-  tableOfContent: {
-    display: true,
-    subItems: false,
-  },
-  avatar: {
-    display: true,
-  },
-  calendar: {
-    display: true,
-    link: "https://cal.com",
-  },
-  intro: {
-    display: true,
-    title: "Introduction",
-    description: (
-      <>
-        Selene is a Jakarta-based design engineer with a passion for
-        transforming complex challenges into simple, elegant design solutions.
-        Her work spans digital interfaces, interactive experiences, and the
-        convergence of design and technology.
-      </>
-    ),
-  },
-  work: {
-    display: true, // set to false to hide this section
-    title: "Work Experience",
-    experiences: [
-      {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
-        achievements: [
-          <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20%
-            increase in user engagement and 30% faster load times.
-          </>,
-          <>
-            Spearheaded the integration of AI tools into design workflows,
-            enabling designers to iterate 50% faster.
-          </>,
-        ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Project Cover",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-      {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
-        achievements: [
-          <>
-            Developed a design system that unified the brand across multiple
-            platforms, improving design consistency by 40%.
-          </>,
-          <>
-            Led a cross-functional team to launch a new product line,
-            contributing to a 15% increase in overall company revenue.
-          </>,
-        ],
-        images: [],
-      },
-    ],
-  },
-  studies: {
-    display: true, // set to false to hide this section
-    title: "Studies",
-    institutions: [
-      {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
-      },
-      {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
-      },
-    ],
-  },
-  technical: {
-    display: true, // set to false to hide this section
-    title: "Technical skills",
-    skills: [
-      {
-        title: "Figma",
-        description: (
-          <>Able to prototype in Figma with exceptional speed and precision.</>
-        ),
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-      {
-        title: "Next.js",
-        description: (
-          <>
-            Building next gen apps with Next.js, React, and modern web
-            technologies.
-          </>
-        ),
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
-      },
-    ],
-  },
-};
-
-const blog = {
-  label: "Blog",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
-};
-
 const team = {
   label: "Team Members",
   title: "Research Team",
-  description: `Meet the research team led by ${person.name}`,
+  description: ``,
   principalInvestigator: {
     name: "Dr. Karl Mason",
     title: "Principal Investigator",
@@ -956,7 +798,7 @@ const work = {
 const publications = {
   label: "Publications",
   title: "Selected Publications",
-  description: `A selection of research publications by ${person.name}`,
+  description: ``,
   googleScholarUrl:
     "https://scholar.google.com/citations?hl=en&view_op=list_works&authuser=1&gmla=AJsN-F6U7RFLJVHk_P6J5rJc-yn5wDYFsRd_gXE14cgpNx1X2K3l2k1XHHlz8KKiyr6fURN84i0LyCucixsemWSmVCbAiFhSSA&user=kxcJG50AAAAJ",
   publications: [
@@ -1034,10 +876,7 @@ const publications = {
 export {
   person,
   social,
-  newsletter,
   home,
-  about,
-  blog,
   work,
   publications,
   team,

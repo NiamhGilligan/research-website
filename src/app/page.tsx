@@ -80,15 +80,28 @@ export default function Home() {
             horizontal="start"
             paddingBottom="l"
           >
-            <Flex direction="column" gap="16">
-              <Heading variant="heading-strong-m">Research Funding</Heading>
-              <Text
-                wrap="balance"
-                onBackground="neutral-weak"
-                variant="body-default-s"
-              >
-                {home.funding}
-              </Text>
+            <Flex gap="32" mobileDirection="column">
+              <Flex direction="column" gap="16" flex={1}>
+                <Heading variant="heading-strong-m">Our Mission</Heading>
+                <Text
+                  wrap="balance"
+                  onBackground="neutral-weak"
+                  variant="body-default-s"
+                >
+                  {home.mission}
+                </Text>
+              </Flex>
+
+              <Flex direction="column" gap="16" flex={1}>
+                <Heading variant="heading-strong-m">Research Funding</Heading>
+                <Text
+                  wrap="balance"
+                  onBackground="neutral-weak"
+                  variant="body-default-s"
+                >
+                  {home.funding}
+                </Text>
+              </Flex>
             </Flex>
           </RevealFx>
 
@@ -113,7 +126,7 @@ export default function Home() {
           </RevealFx>
 
           <RevealFx
-            translateY="16"
+            translateY="20"
             delay={0.5}
             fillWidth
             horizontal="center"
@@ -131,7 +144,7 @@ export default function Home() {
           </RevealFx>
 
           <RevealFx
-            translateY="16"
+            translateY="24"
             delay={0.6}
             fillWidth
             horizontal="center"

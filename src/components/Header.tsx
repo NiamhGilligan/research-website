@@ -10,8 +10,6 @@ import { routes, display } from "@/app/resources";
 import {
   person,
   publications,
-  about,
-  blog,
   work,
   team,
   news,
