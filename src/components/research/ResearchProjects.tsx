@@ -32,6 +32,7 @@ export const ResearchProjects = () => {
       smart: styles.smartHome,
       home: styles.smartHome,
       building: styles.smartHome,
+      aiprint: styles.aiPrint,
     };
 
     return (

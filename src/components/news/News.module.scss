@@ -36,19 +36,25 @@
 }
 
 .selectedNewsCard {
-  overflow: hidden;
+  overflow: visible !important;
   word-wrap: break-word;
+  height: fit-content !important;
+  min-height: fit-content !important;
 
   @media (max-width: 768px) {
     padding: 16px !important;
-    overflow: hidden;
+    overflow: visible !important;
     word-wrap: break-word;
+    height: fit-content !important;
+    min-height: fit-content !important;
   }
 
   @media (max-width: 480px) {
     padding: 12px !important;
-    overflow: hidden;
+    overflow: visible !important;
     word-wrap: break-word;
+    height: fit-content !important;
+    min-height: fit-content !important;
   }
 }
 
@@ -76,25 +82,33 @@
 .imageContainer {
   max-width: 800px;
   width: 100%;
-  max-height: 600px;
   padding: 10px;
+  overflow: visible !important;
+  height: fit-content !important;
+  min-height: fit-content !important;
 
   @media (max-width: 768px) {
     padding: 8px;
-    max-height: 400px;
+    max-height: none !important;
+    height: fit-content !important;
+    min-height: fit-content !important;
   }
 }
 
 .newsImage {
   border-radius: 8px;
-  object-fit: contain;
-  max-width: 100%;
-  height: auto;
-  width: 100%;
-  display: block;
+  object-fit: contain !important;
+  max-width: 100% !important;
+  height: auto !important;
+  width: 100% !important;
+  display: block !important;
+  overflow: visible !important;
+  position: relative !important;
 
   @media (max-width: 768px) {
     border-radius: 6px;
+    max-height: none !important;
+    position: relative !important;
   }
 }
 
@@ -121,11 +135,15 @@
   background-color: white !important;
   padding: 20px !important;
   border-radius: 8px !important;
-  max-height: 80px;
+  max-height: none !important;
+  height: fit-content !important;
+  position: relative !important;
 
   @media (max-width: 768px) {
     padding: 12px !important;
-    max-height: 60px;
+    max-height: none !important;
+    height: fit-content !important;
+    position: relative !important;
   }
 
   img {
@@ -133,21 +151,28 @@
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
-    max-height: 120px !important;
+    max-height: none !important;
+    position: relative !important;
 
     @media (max-width: 768px) {
-      max-height: 80px !important;
+      max-height: none !important;
+      height: auto !important;
+      position: relative !important;
     }
   }
 }
 
 .icccspKeynote {
   max-width: 900px !important;
-  max-height: 600px !important;
+  max-height: none !important;
+  height: fit-content !important;
+  position: relative !important;
 
   @media (max-width: 768px) {
     max-width: 100% !important;
-    max-height: 400px !important;
+    max-height: none !important;
+    height: fit-content !important;
+    position: relative !important;
   }
 
   img {
@@ -155,107 +180,145 @@
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
+    max-height: none !important;
     border-radius: 8px !important;
+    position: relative !important;
   }
 }
 
 .ietSmartGrid {
   max-width: 550px !important;
-  max-height: 1000px !important;
+  max-height: none !important;
+  height: fit-content !important;
+  position: relative !important;
 
   @media (max-width: 768px) {
     max-width: 100% !important;
-    max-height: 600px !important;
+    max-height: none !important;
+    height: fit-content !important;
+    position: relative !important;
   }
 
   img {
     width: 100% !important;
     height: auto !important;
+    max-height: none !important;
     border-radius: 8px !important;
+    position: relative !important;
   }
 }
 
 .springerEvoStar {
   max-width: 550px !important;
-  max-height: 900px !important;
+  max-height: none !important;
+  height: fit-content !important;
+  position: relative !important;
 
   @media (max-width: 768px) {
     max-width: 100% !important;
-    max-height: 600px !important;
+    max-height: none !important;
+    height: fit-content !important;
+    position: relative !important;
   }
 
   img {
     width: 100% !important;
     height: auto !important;
+    max-height: none !important;
     border-radius: 8px !important;
+    position: relative !important;
   }
 }
 
 .kerJournal {
   max-width: 400px !important;
-  max-height: 600px !important;
+  max-height: none !important;
+  height: fit-content !important;
+  position: relative !important;
 
   @media (max-width: 768px) {
     max-width: 100% !important;
-    max-height: 400px !important;
+    max-height: none !important;
+    height: fit-content !important;
+    position: relative !important;
   }
 
   img {
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
+    max-height: none !important;
     border-radius: 8px !important;
+    position: relative !important;
   }
 }
 
 .brlImage {
   max-width: 800px !important;
-  max-height: 600px !important;
+  max-height: none !important;
+  height: fit-content !important;
+  position: relative !important;
 
   @media (max-width: 768px) {
     max-width: 100% !important;
-    max-height: 400px !important;
+    max-height: none !important;
+    height: fit-content !important;
+    position: relative !important;
   }
 
   img {
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
+    max-height: none !important;
     border-radius: 8px !important;
+    position: relative !important;
   }
 }
 
 .riaImage {
   max-width: 600px !important;
-  max-height: 400px !important;
+  max-height: none !important;
+  height: fit-content !important;
+  position: relative !important;
 
   @media (max-width: 768px) {
     max-width: 100% !important;
-    max-height: 300px !important;
+    max-height: none !important;
+    height: fit-content !important;
+    position: relative !important;
   }
 
   img {
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
+    max-height: none !important;
     border-radius: 8px !important;
+    position: relative !important;
   }
 }
 
 .defaultImage {
   max-width: 700px !important;
-  max-height: 500px !important;
+  max-height: none !important;
+  height: fit-content !important;
+  position: relative !important;
 
   @media (max-width: 768px) {
     max-width: 100% !important;
-    max-height: 350px !important;
+    max-height: none !important;
+    height: fit-content !important;
+    position: relative !important;
   }
 
   img {
     object-fit: contain !important;
     width: 100% !important;
     height: auto !important;
+    max-height: none !important;
     border-radius: 8px !important;
+    position: relative !important;
   }
 }
 
@@ -348,4 +411,11 @@
     word-break: break-all;
     overflow-wrap: anywhere;
   }
+}
+
+// Ensure all images use relative positioning
+.newsCard img,
+.selectedNewsCard img,
+.imageContainer img {
+  position: relative !important;
 }

@@ -38,6 +38,10 @@
     display: none !important;
 }
 
+.s-flex-hide {
+    display: flex !important;
+}
+
 @media (--l) {
     .l-flex-hide {
         display: none !important;
