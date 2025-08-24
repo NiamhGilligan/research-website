@@ -6,16 +6,24 @@
   @media (max-width: 768px) {
     min-width: 100%;
     max-width: 100%;
-    display: none;
+    display: none !important;
 
     &.sidebarOpen {
-      display: flex;
+      display: flex !important;
       margin-bottom: 16px;
       padding: 16px;
       background: var(--color-surface);
       border-radius: 8px;
       border: 1px solid var(--color-border);
     }
+  }
+}
+
+/* Ensure sidebar is hidden on mobile when not open */
+@media (max-width: 768px) {
+  .sidebar:not(.sidebarOpen) {
+    display: none !important;
+    visibility: hidden !important;
   }
 }
 
