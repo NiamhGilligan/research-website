@@ -75,16 +75,18 @@ export const ResearchProjects = () => {
 
   return (
     <Flex gap="32" mobileDirection="column">
-      {/* Mobile Navigation Toggle */}
-      <Flex className={styles.mobileNavToggle}>
-        <Button
-          variant="secondary"
-          size="s"
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        >
-          {isSidebarOpen ? "Hide Navigation" : "Show Navigation"}
-        </Button>
-      </Flex>
+      {/* Mobile Navigation Toggle - Only show when sidebar is closed */}
+      {!isSidebarOpen && (
+        <Flex className={styles.mobileNavToggle}>
+          <Button
+            variant="secondary"
+            size="s"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            Show Navigation
+          </Button>
+        </Flex>
+      )}
 
       {/* Quick Navigation Sidebar */}
       <Flex
@@ -94,6 +96,18 @@ export const ResearchProjects = () => {
           isSidebarOpen ? styles.sidebarOpen : ""
         }`}
       >
+        {/* Hide Navigation Button - Only show when sidebar is open */}
+        {isSidebarOpen && (
+          <Flex className={styles.mobileNavToggle}>
+            <Button
+              variant="secondary"
+              size="s"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              Hide Navigation
+            </Button>
+          </Flex>
+        )}
         <Heading variant="heading-strong-s">Quick Navigation</Heading>
         <Flex direction="column" gap="8">
           {work.projects.map((project) => (
