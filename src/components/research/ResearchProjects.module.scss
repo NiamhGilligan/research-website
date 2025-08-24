@@ -19,6 +19,11 @@
   }
 }
 
+/* Override any display-flex class applied to mobile nav toggle */
+.mobileNavToggle.display-flex {
+  display: none !important;
+}
+
 .mobileNavToggle {
   display: none !important;
   visibility: hidden !important;
@@ -33,7 +38,8 @@
 
 /* Ensure mobile nav toggle is hidden on desktop */
 @media (min-width: 769px) {
-  .mobileNavToggle {
+  .mobileNavToggle,
+  .mobileNavToggle.display-flex {
     display: none !important;
     visibility: hidden !important;
   }
