@@ -8,12 +8,10 @@ import {
   RevealFx,
   Column,
 } from "@/once-ui/components";
-import { Projects } from "@/components/work/Projects";
 import { HomeCarousel } from "@/components/HomeCarousel";
-import { baseURL, routes } from "@/app/resources";
-import { home, about, person, team } from "@/app/resources/content";
+import { baseURL, } from "@/app/resources";
+import { home,  team } from "@/app/resources/content";
 
-import { Posts } from "@/components/blog/Posts";
 import {
   generatePageMetadata,
   generateStructuredData,
@@ -143,10 +141,6 @@ export default function Home() {
           </RevealFx>
         </Column>
       </Column>
-      <RevealFx translateY="16" delay={0.6}>
-        <Projects range={[1, 1]} />
-      </RevealFx>
-      <Projects range={[2]} />
     </Column>
   );
 }
